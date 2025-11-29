@@ -64,7 +64,7 @@ function Product({productObj}){
       <img src={"/img/"%productObj.image}></img>
       <h2>{productObj.title}</h2>
       <p>{productObj.description}</p>
-      <span> { productObj.price} TL</span>
+      <span className={`f20 ${productObj.price<100000?"dicount":"price"}`}> { productObj.price} TL</span>
     </div>
   );
 }
