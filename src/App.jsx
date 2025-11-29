@@ -23,23 +23,27 @@ function ProductList(){
       "image":"1.jpg",
       "title":"Iphone 16",
       "description": "Lorem ipsum dolor sit amet.",
-       "price":80000
+      "price":80000,
+      "is_active":false,
     },
     {
       "image":"2.jpg",
       "title":"Iphone 17",
       "description": "Lorem ipsum dolor sit amet.",
-       "price":90000
+       "price":90000,
+       "is_active":true,
     },
     {
       "image":"3.jpg",
       "title":"Iphone 18",
       "description": "Lorem ipsum dolor sit amet.",
-       "price":100000
+       "price":100000,
+       "is_active":true,
     },
   ];
 
   return (
+    items.length>0 ? (
     <>
       <h2>Product List</h2>
       {
@@ -48,9 +52,13 @@ function ProductList(){
         ))
       }
     </>
+    ): (
+      <p>Satışta ürün bulunmamaktadır.</p>
+    )
   );
 }
 function Product({productObj}){
+  if(!productObj.is_active) return null;
   return (
     <div>
       <img src={"/img/"%productObj.image}></img>
