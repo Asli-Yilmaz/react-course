@@ -8,14 +8,24 @@ function App() {
   return (
     <>
       <Header/>
-      <ProductList/>
-      <Footer/>
+      {/* header ile içeriği hizalamak için bunları da container içine aldık */}
+      <div className='container mt-3'>
+        <ProductList/>
+      </div>
     </>
   )
 }
 
 function Header(){
-  return <h1>Header</h1>
+  return (
+	<header>
+		<nav className="navbar navbar-expand bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div className="container">
+        <a href="#" className="navbar-brand">Store App</a>
+      </div>
+		</nav>
+	</header>
+  );
 }
 function ProductList(){
   const items=[
@@ -24,7 +34,7 @@ function ProductList(){
       "title":"Iphone 16",
       "description": "Lorem ipsum dolor sit amet.",
       "price":80000,
-      "is_active":false,
+      "is_active":true,
     },
     {
       "image":"2.jpg",
@@ -40,31 +50,69 @@ function ProductList(){
        "price":100000,
        "is_active":true,
     },
+    {
+      "image":"4.jpg",
+      "title":"Iphone 19",
+      "description": "Lorem ipsum dolor sit amet.",
+       "price":1000000,
+       "is_active":true,
+    },
+    {
+      "image":"4.jpg",
+      "title":"Iphone 19",
+      "description": "Lorem ipsum dolor sit amet.",
+       "price":1000000,
+       "is_active":true,
+    },
+    {
+      "image":"4.jpg",
+      "title":"Iphone 19",
+      "description": "Lorem ipsum dolor sit amet.",
+       "price":1000000,
+       "is_active":true,
+    },
+    {
+      "image":"4.jpg",
+      "title":"Iphone 19",
+      "description": "Lorem ipsum dolor sit amet.",
+       "price":1000000,
+       "is_active":true,
+    },
+    
   ];
 
   return (
-    items.length>0 ? (
     <>
-      <h2>Product List</h2>
-      {
-        items.map((item,index)=>(
-          <Product key={index} productObj={item}/>
-        ))
-      }
+    {
+      items.length>0 ? (
+      // mobilde yanyana 2, md de 3 xlde ise 4 ürün gösterilecek demektir g-4 ise elemanalr arası boşluk
+      <div className='row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4' id="product-list">        
+        {
+          items.map((item,index)=>(
+            <div className='col'>
+              <Product key={index} productObj={item}/>
+            </div>
+          ))
+        }
+      </div>
+      ): (
+        <p>Satışta ürün bulunmamaktadır.</p>
+      )
+    }
     </>
-    ): (
-      <p>Satışta ürün bulunmamaktadır.</p>
-    )
   );
 }
 function Product({productObj}){
   if(!productObj.is_active) return null;
   return (
-    <div>
-      <img src={"/img/"%productObj.image}></img>
-      <h2>{productObj.title}</h2>
-      <p>{productObj.description}</p>
-      <span className={`f20 ${productObj.price<100000?"dicount":"price"}`}> { productObj.price} TL</span>
+    <div className='card shadow-sm'>
+      {/*mobil cihazlarda 2 birim pedding diğerlerinde 3 */}
+      <img className="card-img-top p-2 p-md-3 border-bottom"src={"/img/"%productObj.image}></img>
+      <div className="card-body">
+        <h2 className='card-title'>{productObj.title}</h2>
+        <p className='card-text'>{productObj.description}</p>
+        <span className="badge text-bg-success"> { productObj.price} TL</span>
+      </div>
     </div>
   );
 }
